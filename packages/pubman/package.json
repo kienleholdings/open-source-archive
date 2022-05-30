@@ -1,0 +1,48 @@
+{
+  "name": "@kienleholdings/pubman",
+  "version": "0.1.3",
+  "description": "Publish packages automatically if their version has changed",
+  "main": "./dist/publish.js",
+  "types": "./dist/publish.d.ts",
+  "bin": {
+    "pubman": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc --declaration",
+    "lint": "eslint --cache src/**"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kienleholdings/technologies.git"
+  },
+  "keywords": [
+    "Kienle Holdings",
+    "monorepo"
+  ],
+  "author": "Kienle Technologies <hello@kienle.tech> (https://www.kienle.tech)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kienleholdings/technologies/issues"
+  },
+  "homepage": "https://github.com/kienleholdings/technologies/tree/main/packages/pubman#readme",
+  "devDependencies": {
+    "@kienleholdings/eslint-config-base": "^0.1.9",
+    "@kienleholdings/prettierrc": "workspace:*",
+    "@kienleholdings/tsconfigs": "workspace:*",
+    "@types/node": "16.x",
+    "@types/semver": "^7.3.9",
+    "eslint": "^8.13.0",
+    "prettier": "2.6.2",
+    "typescript": "^4.6.3"
+  },
+  "dependencies": {
+    "@kienleholdings/mrt-utils": "^0.2.0",
+    "execa": "^5.1.1",
+    "minimist-lite": "^2.2.1",
+    "semver": "^7.3.7",
+    "tslib": "^2.3.1"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "name": "@kienleholdings/prettierrc",
+  "version": "0.1.5",
+  "description": "Kienle Holdings Prettier configuration",
+  "main": "index.js",
+  "scripts": {},
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kienleholdings/technologies.git"
+  },
+  "keywords": [
+    "Kienle Holdings",
+    "prettier"
+  ],
+  "author": "Kienle Technologies <hello@kienle.tech> (https://www.kienle.tech)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kienleholdings/technologies/issues"
+  },
+  "homepage": "https://github.com/kienleholdings/technologies/tree/main/packages/prettierrc#readme",
+  "peerDependencies": {
+    "prettier": "2.6.2"
+  }
+}

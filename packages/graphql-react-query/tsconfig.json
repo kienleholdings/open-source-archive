@@ -1,0 +1,13 @@
+{
+  "exclude": ["node_modules"],
+  "extends": "@kienleholdings/tsconfigs/base.json",
+  "include": ["./src"],
+  "compilerOptions": {
+    "jsx": "preserve",
+    "lib": ["ESNext"],
+    "module": "commonjs",
+    "outDir": "dist",
+    "target": "es2021",
+    "types": ["node"]
+  }
+}

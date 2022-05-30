@@ -1,0 +1,10 @@
+{
+  "exclude": ["node_modules"],
+  "extends": "@kienleholdings/tsconfigs/base.json",
+  "include": ["./src"],
+  "compilerOptions": {
+    "lib": ["ESNext", "DOM"],
+    "outDir": "dist",
+    "target": "ESNext"
+  }
+}

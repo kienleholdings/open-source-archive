@@ -1,0 +1,54 @@
+{
+  "name": "@kienleholdings/graphql-prisma",
+  "version": "0.1.0",
+  "description": "An all-in-one configuration of GraphQL, Prisma, and Pothos",
+  "prettier": "@kienleholdings/prettierrc",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc --declaration",
+    "dev": "pnpm run build --watch",
+    "lint": "eslint --cache src/**",
+    "typecheck": "tsc --noEmit"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kienleholdings/technologies.git"
+  },
+  "keywords": [
+    "Kienle Holdings",
+    "GraphQL",
+    "Prisma",
+    "Pothos"
+  ],
+  "author": "Kienle Technologies <hello@kienle.tech> (https://www.kienle.tech)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kienleholdings/technologies/issues"
+  },
+  "homepage": "https://github.com/kienleholdings/technologies/tree/main/packages/graphql-prisma#readme",
+  "devDependencies": {
+    "@kienleholdings/eslint-config-base": "workspace:*",
+    "@kienleholdings/prettierrc": "workspace:*",
+    "@kienleholdings/tsconfigs": "workspace:*",
+    "@pothos/core": "^3.10.1",
+    "@pothos/plugin-prisma": "^3.6.1",
+    "@prisma/client": "^3.13.0",
+    "@types/node": "16.x",
+    "graphql": "^16.4.0",
+    "prettier": "2.6.2",
+    "typescript": "^4.6.3"
+  },
+  "dependencies": {
+    "tslib": "^2.4.0"
+  },
+  "peerDependencies": {
+    "@pothos/core": ">= 3.0.0 < 4",
+    "@pothos/plugin-prisma": ">= 3.0.0 < 4",
+    "@prisma/client": ">= 3.0.0 < 4",
+    "graphql": ">= 16.0.0 < 17"
+  }
+}

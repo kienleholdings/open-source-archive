@@ -1,0 +1,46 @@
+{
+  "name": "@kienleholdings/eslint-config-nextjs",
+  "version": "0.1.0",
+  "description": "Kienle Holdings NextJS ESLint Config",
+  "main": "index.js",
+  "scripts": {},
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kienleholdings/technologies.git"
+  },
+  "keywords": [
+    "typescript",
+    "kienle"
+  ],
+  "author": "Kienle Technologies <hello@kienle.tech> (https://www.kienle.tech)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kienleholdings/technologies/issues"
+  },
+  "homepage": "https://github.com/kienleholdings/technologies/tree/main/packages/eslint-config-nextjs#readme",
+  "devDependencies": {
+    "@kienleholdings/prettierrc": "workspace:*",
+    "eslint": "^8.13.0",
+    "next": "12.1.5",
+    "prettier": "2.6.2",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "typescript": "^4.6.3"
+  },
+  "peerDependencies": {
+    "@kienleholdings/prettierrc": "workspace:*",
+    "eslint": ">= 8.0.0 < 9",
+    "next": ">= 12.0.0 < 13",
+    "prettier": "2.6.2",
+    "react": ">= 18.0.0 < 19",
+    "react-dom": ">= 18.0.0 < 19",
+    "typescript": ">= 4.0.0 < 5"
+  },
+  "dependencies": {
+    "@kienleholdings/eslint-config-react": "workspace:*",
+    "@next/eslint-plugin-next": "^12.1.5"
+  }
+}

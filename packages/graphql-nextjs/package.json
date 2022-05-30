@@ -1,0 +1,52 @@
+{
+  "name": "@kienleholdings/graphql-nextjs",
+  "version": "0.1.0",
+  "description": "A Redistributable Next.js Implementation of GraphQL Helix",
+  "prettier": "@kienleholdings/prettierrc",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc --declaration",
+    "dev": "pnpm run build --watch",
+    "lint": "eslint --cache src/**",
+    "typecheck": "tsc --noEmit"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kienleholdings/technologies.git"
+  },
+  "keywords": [
+    "Kienle Holdings",
+    "GraphQL",
+    "Next.js"
+  ],
+  "author": "Kienle Technologies <hello@kienle.tech> (https://www.kienle.tech)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kienleholdings/technologies/issues"
+  },
+  "homepage": "https://github.com/kienleholdings/technologies/tree/main/packages/graphql-nextjs#readme",
+  "devDependencies": {
+    "@kienleholdings/eslint-config-base": "workspace:*",
+    "@kienleholdings/prettierrc": "workspace:*",
+    "@kienleholdings/tsconfigs": "workspace:*",
+    "@types/node": "^17.0.31",
+    "graphql": "^16.4.0",
+    "next": "^12.1.6",
+    "prettier": "2.6.2",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "typescript": "^4.6.3"
+  },
+  "dependencies": {
+    "graphql-helix": "^1.12.0",
+    "tslib": "^2.4.0"
+  },
+  "peerDependencies": {
+    "graphql": ">= 16.0.0 < 17",
+    "next": ">= 12.0.0 < 13"
+  }
+}

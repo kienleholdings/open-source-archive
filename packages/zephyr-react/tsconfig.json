@@ -1,0 +1,14 @@
+{
+  "extends": "@kienleholdings/tsconfigs/react.json",
+  "include": ["./src/**/*.ts", "./src/**/*.tsx"],
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "outDir": "dist",
+    "jsx": "preserve",
+    "paths": {
+      "components/*": ["./components/*"],
+      "types/*": ["./types/*"],
+      "utils/*": ["./utils/*"]
+    }
+  }
+}

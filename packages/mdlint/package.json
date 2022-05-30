@@ -1,0 +1,28 @@
+{
+  "name": "@kienleholdings/mdlint",
+  "version": "0.1.2",
+  "description": "Kienle Holdings Markdownlint Config",
+  "main": "index.js",
+  "scripts": {},
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kienleholdings/technologies.git"
+  },
+  "keywords": [
+    "markdown",
+    "markdownlint",
+    "Kienle Holdings"
+  ],
+  "author": "Kienle Technologies <hello@kienle.tech> (https://www.kienle.tech)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kienleholdings/technologies/issues"
+  },
+  "homepage": "https://github.com/kienleholdings/technologies/tree/main/packages/mdlint#readme",
+  "peerDependencies": {
+    "markdownlint-cli2": ">= 0.4.0 < 1"
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "name": "@kienleholdings/zephyr-react",
+  "version": "3.2.1",
+  "description": "React Component Library for Zephyr",
+  "prettier": "@kienleholdings/prettierrc",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup src/index.ts --inject ./react-import.js --format cjs,esm --sourcemap --minify --dts",
+    "dev": "ladle serve & pnpm run build --watch",
+    "lint": "eslint --cache src/**",
+    "typecheck": "tsc --noEmit"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kienleholdings/technologies.git"
+  },
+  "keywords": [
+    "Kienle Holdings",
+    "tailwindcss",
+    "zephyr"
+  ],
+  "author": "Kienle Technologies <hello@kienle.tech> (https://www.kienle.tech)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kienleholdings/technologies/issues"
+  },
+  "homepage": "https://github.com/kienleholdings/technologies/tree/main/packages/zephyr-react#readme",
+  "devDependencies": {
+    "@kienleholdings/eslint-config-react": "workspace:*",
+    "@kienleholdings/prettierrc": "workspace:*",
+    "@kienleholdings/tsconfigs": "workspace:*",
+    "@kienleholdings/zephyr-core": "workspace:*",
+    "@ladle/react": "^0.15.0",
+    "@types/react": "^18.0.6",
+    "autoprefixer": "^10.4.5",
+    "eslint": "^8.14.0",
+    "postcss": "^8.4.12",
+    "prettier": "^2.6.2",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "tailwindcss": "^3.0.24",
+    "tslib": "^2.4.0",
+    "tsup": "^5.12.6",
+    "typescript": "^4.6.3"
+  },
+  "peerDependencies": {
+    "@kienleholdings/zephyr-core": ">= 3.0.0 < 4",
+    "react": ">= 18.0.0 < 19",
+    "react-dom": ">= 18.0.0 < 19"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.1.1",
+    "@fortawesome/free-solid-svg-icons": "^6.1.1",
+    "@fortawesome/react-fontawesome": "^0.1.18",
+    "classnames": "^2.3.1",
+    "clsx": "^1.1.1"
+  }
+}
