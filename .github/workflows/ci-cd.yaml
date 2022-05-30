@@ -50,7 +50,7 @@ jobs:
         with:
           name: builds
       - name: Lint All Apps and Packages
-        run: pnpm run lint 
+        run: pnpm run lint
   test:
     name: Test All Apps and Packages
     needs: [build]

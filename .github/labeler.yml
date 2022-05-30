@@ -1,11 +1,11 @@
 'Configuration: CI':
-  - ".github/workflows/**"
+  - '.github/workflows/**'
 'Configuration: Devcontainer':
-  - ".devcontainer/**"
+  - '.devcontainer/**'
 'Configuration: Github':
-  - ".github/**"
-  - "!.github/workflows/*"
-  - ".gitignore"
+  - '.github/**'
+  - '!.github/workflows/*'
+  - '.gitignore'
 Dependencies:
   - pnpm-lock.yaml
 Documentation:
