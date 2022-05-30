@@ -1,7 +1,7 @@
 {
-  "name": "@kienleholdings/org-name",
+  "name": "@kienleholdings/open-source",
   "version": "0.0.0",
-  "description": "📂  A GitHub Template for Creating a Kienle Holdings Org Monorepo",
+  "description": "🧡 Open Source Apps and Packages from Kienle Holdings",
   "private": true,
   "prettier": "@kienleholdings/prettierrc",
   "scripts": {
@@ -14,15 +14,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kienleholdings/org-name.git"
+    "url": "git+https://github.com/kienleholdings/open-source.git"
   },
   "keywords": [],
-  "author": "Org Name <email@org.kienle> (https://www.org.kienle)",
-  "license": "UNLICENSED",
+  "author": "Kienle Technologies <hello@kienle.tech> (https://www.kienle.tech)",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/kienleholdings/org-name/issues"
+    "url": "https://github.com/kienleholdings/open-source/issues"
   },
-  "homepage": "https://github.com/kienleholdings/org-name#readme",
+  "homepage": "https://github.com/kienleholdings/open-source#readme",
   "devDependencies": {
     "@kienleholdings/mdlint": "^0.1.2",
     "@kienleholdings/prettierrc": "*",

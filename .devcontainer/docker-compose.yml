@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  repo: # This can be named anything as long as it's the same in devcontainer.json
+  open-source: # This can be named anything as long as it's the same in devcontainer.json
     build: 
       context: .
       dockerfile: Dockerfile

@@ -1,11 +1,8 @@
-# Generally speaking, the following files are mostly handled by the technologies org. You can
-# change this if you want, but you may not get prompt reviews from the people that specialize in
-# these files. This also might give us more insight on what we need to add to our templates
 .devcontainer/* @kienleholdings/technologies
+.github/* @kienleholdings/technologies
+
+apps/* @kienleholdings/technologies
+packages/* @kienleholdings/technologies
+
 .gitignore @kienleholdings/technologies
 turbo.json @kienleholdings/technologies
-
-# These files should be appropriately assigned to the right teams / members
-.github/* @kienleholdings/technologies
-# apps/* @kienleholdings/your_team
-# packages/* @kienleholdings/your_team

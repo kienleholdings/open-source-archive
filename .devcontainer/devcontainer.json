@@ -6,10 +6,10 @@
     "DavidAnson.vscode-markdownlint"
   ],
   "forwardPorts": [],
-  "name": "Organization Monorepo Template",
+  "name": "Open Source",
   "postCreateCommand": "pnpm setup && pnpm install",
   "remoteUser": "node",
-  "service": "repo",
+  "service": "open-source",
   "settings": {
     "editor.tabSize": 2,
     "editor.defaultFormatter": "esbenp.prettier-vscode",
