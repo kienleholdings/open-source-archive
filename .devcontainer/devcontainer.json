@@ -1,0 +1,26 @@
+{
+  "dockerComposeFile": "docker-compose.yml",
+  "extensions": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "DavidAnson.vscode-markdownlint"
+  ],
+  "forwardPorts": [],
+  "name": "Organization Monorepo Template",
+  "postCreateCommand": "pnpm setup && pnpm install",
+  "remoteUser": "node",
+  "service": "repo",
+  "settings": {
+    "editor.tabSize": 2,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "eslint.workingDirectories": [
+      {
+        "pattern": "apps/*"
+      },
+      {
+        "pattern": "packages/*"
+      }
+    ]
+  },
+  "workspaceFolder": "/workspace"
+}

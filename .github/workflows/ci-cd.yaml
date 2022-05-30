@@ -1,0 +1,143 @@
+name: CI and CD
+on: push
+jobs:
+  build:
+    name: Build All Apps and Packages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      - name: Install and Set Up pnpm
+        uses: pnpm/action-setup@v2.2.2
+        with:
+          version: 7.1.0
+      - name: Setup Nodejs LTS
+        uses: actions/setup-node@v3
+        with:
+          cache: 'pnpm'
+          node-version: 'lts/*'
+      - name: Install Dependencies
+        run: pnpm install
+      - name: Build All Apps and Packages
+        run: pnpm run build
+      - name: Upload All Builds to Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: builds
+          path: |
+            apps/**/.next
+            packages/**/dist
+  lint:
+    name: Lint All Apps and Packages
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      - name: Install and Set Up pnpm
+        uses: pnpm/action-setup@v2.2.2
+        with:
+          version: 7.1.0
+      - name: Setup Nodejs LTS
+        uses: actions/setup-node@v3
+        with:
+          cache: 'pnpm'
+          node-version: 'lts/*'
+      - name: Install Dependencies
+        run: pnpm install
+      - name: Restore Build Artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: builds
+      - name: Lint All Apps and Packages
+        run: pnpm run lint 
+  test:
+    name: Test All Apps and Packages
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      - name: Install and Set Up pnpm
+        uses: pnpm/action-setup@v2.2.2
+        with:
+          version: 7.1.0
+      - name: Setup Nodejs LTS
+        uses: actions/setup-node@v3
+        with:
+          cache: 'pnpm'
+          node-version: 'lts/*'
+      - name: Install Dependencies
+        run: pnpm install
+      - name: Restore Build Artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: builds
+      - name: Test All Apps and Packages
+        run: pnpm test
+  typecheck:
+    name: Typecheck All Apps and Packages
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      - name: Install and Set Up pnpm
+        uses: pnpm/action-setup@v2.2.2
+        with:
+          version: 7.1.0
+      - name: Setup Nodejs LTS
+        uses: actions/setup-node@v3
+        with:
+          cache: 'pnpm'
+          node-version: 'lts/*'
+      - name: Install Dependencies
+        run: pnpm install
+      - name: Restore Build Artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: builds
+      - name: Lint All Apps and Packages
+        run: pnpm typecheck
+  deploy-dev:
+    name: Deploy Development Environment
+    needs: [build, lint, test, typecheck]
+    if: github.ref == 'refs/heads/develop'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      - name: Restore Build Artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: builds
+      - name: Deploy Apps to Development Environment
+        run: 'echo "Insert your Dev Deploy Script Here"'
+  publish-packages:
+    name: Publish Packages
+    needs: [build, lint, test, typecheck]
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      - name: Restore Build Artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: builds
+      - name: Publish Packages to NPM Registry
+        run: 'echo "Insert your Package Publish Script Here"'
+  deploy-prod:
+    name: Deploy Production Environment
+    needs: [build, lint, test, typecheck]
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      - name: Restore Build Artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: builds
+      - name: Deploy Apps to Production Environment
+        run: 'echo "Insert your Prod Deploy Script Here"'

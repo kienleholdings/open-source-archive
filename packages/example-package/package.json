@@ -1,0 +1,43 @@
+{
+  "name": "@kienleholdings/example-package",
+  "version": "0.1.0",
+  "description": "An example package that does absolutely nothing!",
+  "prettier": "@kienleholdings/prettierrc",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --sourcemap --dts --splitting",
+    "dev": "pnpm run build --watch",
+    "lint": "eslint --cache src/**",
+    "test": "vitest run --coverage",
+    "test-dev": "vitest dev --coverage"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kienleholdings/org-name.git"
+  },
+  "keywords": [],
+  "author": "Org Name <email@org.kienle> (https://www.org.kienle)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kienleholdings/org-name/issues"
+  },
+  "homepage": "https://github.com/kienleholdings/org-name/tree/main/packages/example-package#readme",
+  "devDependencies": {
+    "@kienleholdings/eslint-config-base": "*",
+    "@kienleholdings/prettierrc": "*",
+    "@kienleholdings/tsconfigs": "*",
+    "c8": "^7.11.2",
+    "eslint": "^8.15.0",
+    "tsup": "^5.12.7",
+    "typescript": "^4.6.4",
+    "vitest": "^0.12.6"
+  },
+  "dependencies": {
+    "prettier": "2.6.2"
+  }
+}

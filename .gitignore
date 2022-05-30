@@ -1,0 +1,30 @@
+# Build Output
+dist
+
+# ESLint Cache
+.eslintcache
+
+# Local .env Files
+.env.local
+.env.*.local
+
+# Logs
+.pnpm-debug.log*
+
+# Next.js
+.next/
+
+# Node Modules and PNPM Store
+.pnpm-store
+node_modules
+**/node_modules/**
+
+# OS Garbage
+.DS_Store
+
+# Test Results
+coverage
+results.xml
+
+# Turborepo Build Output
+.turbo

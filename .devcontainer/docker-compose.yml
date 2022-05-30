@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  repo: # This can be named anything as long as it's the same in devcontainer.json
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    command: sleep infinity # This allows VSCode to start the container without being forced to run any apps
+    container_name: devcontainer
+    volumes:
+      - ..:/workspace:cached 

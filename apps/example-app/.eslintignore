@@ -1,0 +1,5 @@
+.next
+
+.eslintrc.js
+next.config.js
+vitest.config.ts

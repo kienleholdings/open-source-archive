@@ -1,0 +1,43 @@
+{
+  "name": "@kienleholdings/org-name",
+  "version": "0.0.0",
+  "description": "📂  A GitHub Template for Creating a Kienle Holdings Org Monorepo",
+  "private": true,
+  "prettier": "@kienleholdings/prettierrc",
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "markdownlint-cli2 \"**/*.md\" \"#node_modules\" \"#**/node_modules\" && turbo run lint",
+    "nuke-deps": "find . -name 'node_modules' -type d -prune -exec rm -rf '{}' + && rm -r .pnpm-store",
+    "test": "turbo run test",
+    "typecheck": "turbo run typecheck"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kienleholdings/org-name.git"
+  },
+  "keywords": [],
+  "author": "Org Name <email@org.kienle> (https://www.org.kienle)",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/kienleholdings/org-name/issues"
+  },
+  "homepage": "https://github.com/kienleholdings/org-name#readme",
+  "devDependencies": {
+    "@kienleholdings/mdlint": "^0.1.2",
+    "@kienleholdings/prettierrc": "*",
+    "lint-staged": "^12.4.3",
+    "markdownlint-cli2": "^0.4.0",
+    "prettier": "2.6.2",
+    "simple-git-hooks": "^2.8.0",
+    "turbo": "latest"
+  },
+  "engines": {
+    "npm": ">=8.0.0 < 9",
+    "node": ">=16.0.0 < 17"
+  },
+  "packageManager": "pnpm@7.1.0",
+  "simple-git-hooks": {
+    "pre-commit": "pnpm exec lint-staged"
+  }
+}

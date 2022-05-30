@@ -1,0 +1,17 @@
+'Configuration: CI':
+  - ".github/workflows/**"
+'Configuration: Devcontainer':
+  - ".devcontainer/**"
+'Configuration: Github':
+  - ".github/**"
+  - "!.github/workflows/*"
+  - ".gitignore"
+Dependencies:
+  - pnpm-lock.yaml
+Documentation:
+  - README.md
+  - docs/**
+'Workspace Type: app':
+  - apps/**
+'Workspace Type: package':
+  - packages/**
