@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kienleholdings/technologies.git"
+    "url": "git+https://github.com/kienleholdings/open-source.git"
   },
   "keywords": [
     "Kienle Holdings",
@@ -27,9 +27,9 @@
   "author": "Kienle Technologies <hello@kienle.tech> (https://www.kienle.tech)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/kienleholdings/technologies/issues"
+    "url": "https://github.com/kienleholdings/open-source/issues"
   },
-  "homepage": "https://github.com/kienleholdings/technologies/tree/main/packages/graphql-clerk#readme",
+  "homepage": "https://github.com/kienleholdings/open-source/tree/main/packages/graphql-clerk#readme",
   "devDependencies": {
     "@kienleholdings/eslint-config-base": "workspace:*",
     "@kienleholdings/prettierrc": "workspace:*",

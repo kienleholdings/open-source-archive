@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kienleholdings/zephyr.git"
+    "url": "git+https://github.com/open-source/zephyr.git"
   },
   "keywords": [
     "Kienle Holdings",
@@ -27,9 +27,9 @@
   "author": "Kienle Technologies <hello@kienle.tech> (https://www.kienle.tech)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/kienleholdings/zephyr/issues"
+    "url": "https://github.com/open-source/zephyr/issues"
   },
-  "homepage": "https://github.com/kienleholdings/technologies/tree/main/packages/zephyr-formik#readme",
+  "homepage": "https://github.com/open-source/technologies/tree/main/packages/zephyr-formik#readme",
   "devDependencies": {
     "@kienleholdings/eslint-config-react": "workspace:*",
     "@kienleholdings/prettierrc": "workspace:*",

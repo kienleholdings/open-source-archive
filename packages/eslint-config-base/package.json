@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kienleholdings/typescript.git"
+    "url": "git+https://github.com/kienleholdings/open-source.git"
   },
   "keywords": [
     "typescript",
@@ -18,9 +18,9 @@
   "author": "Kienle Technologies <hello@kienle.tech> (https://www.kienle.tech)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/kienleholdings/typescript/issues"
+    "url": "https://github.com/kienleholdings/open-source/issues"
   },
-  "homepage": "https://github.com/kienleholdings/typescript/tree/master/packages/eslint-config-base#readme",
+  "homepage": "https://github.com/kienleholdings/open-source/tree/main/packages/eslint-config-base#readme",
   "devDependencies": {
     "@kienleholdings/prettierrc": "workspace:*",
     "eslint": "^8.13.0",
