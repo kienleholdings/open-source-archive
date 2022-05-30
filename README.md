@@ -1,4 +1,4 @@
-# Organization Monorepo Template
+# Open Source @ Kienle Holdings
 
 🧡 Open Source Apps and Packages from Kienle Holdings
 
