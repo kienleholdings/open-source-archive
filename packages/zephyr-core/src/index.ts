@@ -52,21 +52,21 @@ const fractionalSizes = {
 export const defaultTheme = {
   colors: {
     primary: {
-      DEFAULT: '#DC602E',
-      dark: '#C34715',
-      light: '#F67A48',
-      type: '#FFF',
+      DEFAULT: '#EA7843',
+      dark: '#E76123',
+      light: '#EF956C',
+      type: '#FFFFFF',
     },
-    secondary: {
-      DEFAULT: '#FFF',
-      dark: '#E6E6E6',
-      light: '#FFF',
-      type: '#444',
+    accent: {
+      DEFAULT: '#016FB9',
+      dark: '#01568E',
+      light: '#0186DF',
+      type: '#FFFFFF',
     },
   },
   fontFamily: {
     body: ['"Source Sans Pro"', 'sans-serif'],
-    display: ['"Oxygen"', 'sans-serif'],
+    display: ['"Inter"', 'sans-serif'],
   },
 };
 
@@ -84,7 +84,7 @@ export const createConfig = (
   theme: {
     borderRadius: {
       none: '0',
-      DEFAULT: '8px',
+      DEFAULT: '4px',
       round: '9999px',
     },
     boxShadow: {
@@ -95,26 +95,28 @@ export const createConfig = (
       'level-5': '0px 25px 50px -12px rgba(0, 0, 0, 0.25)',
     },
     colors: {
-      accent: '#016FB9',
-      'bg-dark': '#222',
-      'bg-light': '#F6F9FC',
-      negative: {
-        dark: '#E53130',
-        DEFAULT: '#FE4A49',
-        light: '#FF6463',
+      error: {
+        DEFAULT: '#CC1B00',
+        dark: '#A31600',
+        light: '#FF6047',
+        type: '#FFFFFF',
       },
-      positive: {
-        dark: '#46943D',
-        DEFAULT: '#5FAD56',
-        light: '#79C770',
+      bg: {
+        light: '#444444',
+        dark: '#FFFFFF',
       },
-      warning: {
-        dark: '#D9A835',
-        DEFAULT: '#F2C14E',
-        light: '#FFDB68',
+      fg: {
+        light: '#F8F9FA',
+        dark: '#1C1C1C',
       },
-      black: '#444',
-      white: '#FFF',
+      raised: {
+        light: '#FFFFFF',
+        dark: '#2E2E2E',
+      },
+      'raised-border': {
+        light: '#DFE3E6',
+        dark: '#505050',
+      },
       ...theme.colors,
     },
     extend: {
@@ -127,13 +129,26 @@ export const createConfig = (
     fontFamily: theme.fontFamily,
     // Sizes come from https://gridlover.net/ - Font size 16, Line Height 1.5, Scale Factor 1.618
     fontSize: {
-      body: '16px',
-      'heading-xxl': '177px',
-      'heading-xl': '110px',
-      'heading-lg': '68px',
-      'heading-md': '42px',
-      'heading-sm': '24px',
-      'heading-xs': '16px',
+      'body-xl-desktop': '24px',
+      'body-lg-desktop': '20px',
+      'body-desktop': '16px',
+      'body-sm-desktop': '16px',
+      'body-xl-mobile': '23px',
+      'body-lg-mobile': '19px',
+      'body-mobile': '16px',
+      'body-sm-mobile': '14px',
+      'h1-desktop': '64px',
+      'h2-desktop': '50px',
+      'h3-desktop': '40px',
+      'h4-desktop': '32px',
+      'h5-desktop': '25px',
+      'h6-desktop': '20px',
+      'h1-mobile': '40px',
+      'h2-mobile': '40px',
+      'h3-mobile': '33px',
+      'h4-mobile': '28px',
+      'h5-mobile': '23px',
+      'h6-mobile': '19px',
     },
     height: {
       ...grid,
@@ -147,13 +162,26 @@ export const createConfig = (
       ...fractionalSizes,
     },
     lineHeight: {
-      body: '24px',
-      'heading-xxl': '184px',
-      'heading-xl': '112px',
-      'heading-lg': '72px',
-      'heading-md': '48px',
-      'heading-sm': '32px',
-      'heading-xs': '24px',
+      'body-xl-desktop': '32px',
+      'body-lg-desktop': '24px',
+      'body-desktop': '24px',
+      'body-sm-desktop': '16px',
+      'body-xl-mobile': '32px',
+      'body-lg-mobile': '24px',
+      'body-mobile': '24px',
+      'body-sm-mobile': '16px',
+      'h1-desktop': '80px',
+      'h2-desktop': '64px',
+      'h3-desktop': '48px',
+      'h4-desktop': '40px',
+      'h5-desktop': '32px',
+      'h6-desktop': '24px',
+      'h1-mobile': '64px',
+      'h2-mobile': '48px',
+      'h3-mobile': '40px',
+      'h4-mobile': '32px',
+      'h5-mobile': '32px',
+      'h6-mobile': '24px',
     },
     margin: {
       auto: 'auto',
