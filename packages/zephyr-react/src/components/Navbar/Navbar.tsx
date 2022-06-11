@@ -4,7 +4,7 @@ import type { ComponentType, HTMLProps, ReactNode } from 'react';
 
 import Container from 'components/Container';
 import type { ContainerSizes } from 'components/Container';
-import Icon from 'components/Icon';
+import { Menu, X } from 'components/Icons';
 import { Span } from 'components/Typography';
 import type { Customization, DisplayValueObject } from 'types';
 import { customize, customizeTopLevel, focus, hoverAnimation } from 'utils/commonClassNames';
@@ -78,11 +78,13 @@ export const buildNavbarStyles = ({
   container: customize('flex h-full', custom?.container),
   el: customizeTopLevel(
     [
-      'duration-75 ease-in-out h-72 flex items-center transition w-full',
       hoverAnimation,
+      'flex items-center w-full',
       {
         'bg-raised-light': color === 'solid',
         'dark:bg-raised-dark': color === 'solid',
+        'h-40': size === 'compact',
+        'h-72': size === 'default',
         'shadow-level-4': color === 'solid',
         fixed: sticky,
       },
@@ -109,7 +111,7 @@ export const buildNavbarStyles = ({
     [
       focus,
       'block border-b border-b-raised-border-light dark:border-b-raised-border-dark group hover:text-primary-dark md:border-b-0 px-16',
-      { 'py-8': size === 'compact', 'py-24': size === 'default' },
+      { 'md:py-8': size === 'compact', 'py-16': size === 'compact', 'py-24': size === 'default' },
     ],
     custom?.listItem
   ),
@@ -118,6 +120,9 @@ export const buildNavbarStyles = ({
     [
       'bg-raised-light dark:bg-raised-dark flex fixed items-center justify-center md:hidden overflow-hidden w-screen z-50',
       hoverAnimation,
+      {
+        'delay-200': menuOpen,
+      },
     ],
     custom?.mobileOverlay
   ),
@@ -175,6 +180,7 @@ export function Navbar({
         className,
         color: transitionToSolid || menuOpen ? 'solid' : 'transparent',
         custom,
+        menuOpen,
         size,
         sticky,
       }),
@@ -182,7 +188,7 @@ export function Navbar({
   );
 
   return (
-    <div className="relative">
+    <>
       <header {...props} className={styles.el}>
         <Container className={styles.container} size={containerSize}>
           {!!leftContent && <div className={styles.leftContent}>{leftContent}</div>}
@@ -210,14 +216,19 @@ export function Navbar({
               onClick={() => setMenuOpen(!menuOpen)}
               type="button"
             >
-              <Span className={styles.hamburger}>
-                <Icon icon={menuOpen ? 'times' : 'bars'} />
-              </Span>
+              <Span className={styles.hamburger}>{menuOpen ? <X /> : <Menu />}</Span>
             </button>
           )}
         </Container>
       </header>
-      {sticky && <div className="h-72" />}
+      {sticky && (
+        <div
+          className={clsx({
+            'h-40': size === 'compact',
+            'h-72': size === 'default',
+          })}
+        />
+      )}
       <div
         className={styles.mobileOverlay}
         style={{ height: menuOpen ? 'calc(100vh - 72px)' : '0px' }}
@@ -239,7 +250,7 @@ export function Navbar({
           </ul>
         </nav>
       </div>
-    </div>
+    </>
   );
 }
 
