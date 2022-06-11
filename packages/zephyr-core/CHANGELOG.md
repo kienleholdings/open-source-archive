@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project
 adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.0.0] - 2022-06-01
+
+### Added
+
+- N / A
+
+### Changed
+
+- **Breaking:** Replaced all Colors with Zephyr Foundations 4.0 Styles
+- **Breaking:** Replaced all Font Styles with Zephyr Foundations 4.0 Styles
+
+### Removed
+
+- N / A
+
 ## [3.1.3] - 2022-04-25
 
 ### Added

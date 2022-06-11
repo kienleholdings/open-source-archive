@@ -1,6 +1,6 @@
 {
   "name": "@kienleholdings/zephyr-core",
-  "version": "3.1.3",
+  "version": "4.0.0",
   "description": "Core TailwindCSS Configuration for Zephyr",
   "prettier": "@kienleholdings/prettierrc",
   "main": "dist/index.js",

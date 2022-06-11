@@ -95,17 +95,19 @@ export const createConfig = (
       'level-5': '0px 25px 50px -12px rgba(0, 0, 0, 0.25)',
     },
     colors: {
+      inherit: 'inherit',
+      transparent: 'transparent',
       error: {
         DEFAULT: '#CC1B00',
         dark: '#A31600',
         light: '#FF6047',
         type: '#FFFFFF',
       },
-      bg: {
+      fg: {
         light: '#444444',
         dark: '#FFFFFF',
       },
-      fg: {
+      bg: {
         light: '#F8F9FA',
         dark: '#1C1C1C',
       },
@@ -127,7 +129,6 @@ export const createConfig = (
       ...fractionalSizes,
     },
     fontFamily: theme.fontFamily,
-    // Sizes come from https://gridlover.net/ - Font size 16, Line Height 1.5, Scale Factor 1.618
     fontSize: {
       'body-xl-desktop': '24px',
       'body-lg-desktop': '20px',
@@ -149,6 +150,11 @@ export const createConfig = (
       'h4-mobile': '28px',
       'h5-mobile': '23px',
       'h6-mobile': '19px',
+    },
+    fontWeight: {
+      bold: 600,
+      extrabold: 800,
+      normal: 400,
     },
     height: {
       ...grid,

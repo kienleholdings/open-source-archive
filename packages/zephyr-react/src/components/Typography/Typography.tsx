@@ -1,8 +1,7 @@
 import { useMemo } from 'react';
-import type { ReactNode } from 'react';
-
-import type { ClassName } from 'types';
-import { bodyFont, computeClassName, headingFont } from 'utils/commonClassNames';
+import type { HTMLProps, ReactNode } from 'react';
+import type { ClassName, Customization } from 'types';
+import { bodyFont, computeClassName, customizeTopLevel, headingFont } from 'utils/commonClassNames';
 
 export interface TypographyProps {
   children?: ReactNode;
@@ -34,6 +33,179 @@ export interface TypographyProps {
    * Sets the semantic HTML element to use as the container for the text
    */
   variant: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p' | 'a' | 'div' | 'span' | 'em' | 'strong';
+}
+
+export type TypographyType =
+  | 'h1'
+  | 'h2'
+  | 'h3'
+  | 'h4'
+  | 'h5'
+  | 'h6'
+  | 'body'
+  | 'body-sm'
+  | 'body-lg'
+  | 'body-xl';
+
+interface CommonProps {
+  /**
+   * Sets the font weight to bold - does nothing for headings
+   */
+  bold?: boolean;
+  /**
+   * Will add or override tailwind classes
+   */
+  custom?: {
+    el?: ClassName;
+  };
+  children?: ReactNode;
+  /**
+   * Sets the font style to italic
+   */
+  italic?: boolean;
+  /**
+   * Adds a 16px margin below the element to simulate a break between paragraphs
+   */
+  paragraphSpacing?: boolean;
+  /**
+   * Sets the type of typography to display. This will change the font size and weight
+   */
+  type?: TypographyType;
+}
+
+export const buildTypeStyles = ({
+  bold = false,
+  className = '',
+  custom,
+  italic = false,
+  paragraphSpacing = false,
+  type,
+}: {
+  bold?: boolean;
+  className?: string;
+  custom?: { el?: Customization };
+  italic?: boolean;
+  paragraphSpacing?: boolean;
+  type: TypographyType;
+}) => {
+  if (type.includes('h') && bold) {
+    // eslint-disable-next-line no-console
+    console.warn('Zephyr Warning: Setting bold to true on a heading component will do nothing');
+  }
+  return customizeTopLevel(
+    [
+      'text-fg-light dark:text-fg-dark',
+      {
+        'font-bold': bold && !type.includes('h'),
+        'font-body': !type.includes('h'),
+        'font-extrabold': type.includes('h'),
+        'font-heading': type.includes('h'),
+        'font-normal': !bold && !type.includes('h'),
+        italic,
+        'mb-16': paragraphSpacing,
+        'md:text-body-desktop': type === 'body',
+        'md:text-body-lg-desktop': type === 'body-lg',
+        'md:text-body-sm-desktop': type === 'body-sm',
+        'md:text-body-xl-desktop': type === 'body-xl',
+        'md:text-h1-desktop': type === 'h1',
+        'md:text-h2-desktop': type === 'h2',
+        'md:text-h3-desktop': type === 'h3',
+        'md:text-h4-desktop': type === 'h4',
+        'md:text-h5-desktop': type === 'h5',
+        'md:text-h6-desktop': type === 'h6',
+        'text-body-mobile': type === 'body',
+        'text-body-lg-mobile': type === 'body-lg',
+        'text-body-sm-mobile': type === 'body-sm',
+        'text-body-xl-mobile': type === 'body-xl',
+        'text-h1-mobile': type === 'h1',
+        'text-h2-mobile': type === 'h2',
+        'text-h3-mobile': type === 'h3',
+        'text-h4-mobile': type === 'h4',
+        'text-h5-mobile': type === 'h5',
+        'text-h6-mobile': type === 'h6',
+      },
+    ],
+    className,
+    custom?.el
+  );
+};
+
+type HeadingProps = CommonProps & HTMLProps<HTMLHeadingElement>;
+
+export function H1({
+  bold,
+  className,
+  custom,
+  children,
+  italic,
+  paragraphSpacing = true,
+  type = 'h1',
+  ...props
+}: HeadingProps) {
+  const classNames = buildTypeStyles({ bold, className, custom, italic, paragraphSpacing, type });
+  return (
+    <h1 {...props} className={classNames}>
+      {children}
+    </h1>
+  );
+}
+
+export function H2({
+  bold,
+  className,
+  custom,
+  children,
+  italic,
+  paragraphSpacing = true,
+  type = 'h2',
+  ...props
+}: HeadingProps) {
+  const classNames = buildTypeStyles({ bold, className, custom, italic, paragraphSpacing, type });
+  return (
+    <h2 {...props} className={classNames}>
+      {children}
+    </h2>
+  );
+}
+
+type PProps = CommonProps & HTMLProps<HTMLParagraphElement>;
+
+export function P({
+  bold,
+  className,
+  custom,
+  children,
+  italic,
+  paragraphSpacing = true,
+  type = 'body',
+  ...props
+}: PProps) {
+  const classNames = buildTypeStyles({ bold, className, custom, italic, paragraphSpacing, type });
+  return (
+    <p {...props} className={classNames}>
+      {children}
+    </p>
+  );
+}
+
+type SpanProps = CommonProps & HTMLProps<HTMLSpanElement>;
+
+export function Span({
+  bold,
+  className,
+  custom,
+  children,
+  italic,
+  paragraphSpacing,
+  type = 'body',
+  ...props
+}: SpanProps) {
+  const classNames = buildTypeStyles({ bold, className, custom, italic, paragraphSpacing, type });
+  return (
+    <span {...props} className={classNames}>
+      {children}
+    </span>
+  );
 }
 
 /**

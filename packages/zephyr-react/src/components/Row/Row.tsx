@@ -4,6 +4,8 @@ import type { ReactNode } from 'react';
 import type { ClassName } from 'types';
 import { computeClassName } from 'utils/commonClassNames';
 
+import RowContext from './RowContext';
+
 export interface RowProps {
   children?: ReactNode;
   /**
@@ -42,7 +44,13 @@ export function Row({ children, classNames, gutter = true, wrap = false }: RowPr
     [classNames, gutter, wrap]
   );
 
-  return <div className={computedClassNames.row}>{children}</div>;
+  const context = useMemo(() => ({ gutter }), [gutter]);
+
+  return (
+    <RowContext.Provider value={context}>
+      <div className={computedClassNames.row}>{children}</div>
+    </RowContext.Provider>
+  );
 }
 
 export default Row;

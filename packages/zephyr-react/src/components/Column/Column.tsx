@@ -1,6 +1,7 @@
-import { useMemo } from 'react';
+import { useContext, useMemo } from 'react';
 import type { ReactNode } from 'react';
 
+import { RowContext } from 'components/Row';
 import type { ClassName } from 'types';
 import { computeClassName } from 'utils/commonClassNames';
 
@@ -14,10 +15,6 @@ export interface ColumnProps {
   classNames?: {
     column?: ClassName;
   };
-  /**
-   * Puts an 8pt margin on each edge of the column
-   */
-  gutter?: boolean;
   /**
    * Medium Breakpoint Size
    */
@@ -39,7 +36,8 @@ export interface ColumnProps {
 /**
  * A container with responsive sizing options of 1/12 - 100% of the container
  */
-export function Column({ children, classNames, gutter, xs, sm, md, lg }: ColumnProps) {
+export function Column({ children, classNames, xs, sm, md, lg }: ColumnProps) {
+  const context = useContext(RowContext);
   const computedClassNames = useMemo(
     () => ({
       wrapper: computeClassName(
@@ -47,7 +45,7 @@ export function Column({ children, classNames, gutter, xs, sm, md, lg }: ColumnP
           // I originally tried using string templates for these, but we have to write them all out
           // by hand because of Tailwind 3's new JIT mode, ugh
           {
-            'm-8': gutter,
+            'p-8': context.gutter,
             'w-1/12': xs === '1',
             'w-2/12': xs === '2',
             'w-3/12': xs === '3',
@@ -102,7 +100,7 @@ export function Column({ children, classNames, gutter, xs, sm, md, lg }: ColumnP
         classNames?.column
       ),
     }),
-    [classNames, gutter, xs, sm, md, lg]
+    [classNames, context, xs, sm, md, lg]
   );
 
   return <div className={computedClassNames.wrapper}>{children}</div>;

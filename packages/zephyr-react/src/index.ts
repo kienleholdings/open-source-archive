@@ -15,7 +15,7 @@ export { default as Card } from 'components/Card';
 export type { CardProps } from 'components/Card';
 export { default as Checkbox } from 'components/Checkbox';
 export type { CheckboxProps } from 'components/Checkbox';
-export { default as Column } from 'components/Column';
+export { default as Column, default as Col } from 'components/Column';
 export type { ColumnProps } from 'components/Column';
 export { default as Container } from 'components/Container';
 export type { ContainerProps } from 'components/Container';
@@ -50,6 +50,7 @@ export type { ToastProps } from 'components/Toast';
 export { default as Tooltip } from 'components/Tooltip';
 export type { TooltipProps } from 'components/Tooltip';
 export { default as Typography } from 'components/Typography';
+export { H1, H2, P, Span } from 'components/Typography';
 export type { TypographyProps } from 'components/Typography';
 
 // Types from types/index.ts

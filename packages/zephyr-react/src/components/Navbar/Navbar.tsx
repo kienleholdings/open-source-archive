@@ -1,185 +1,245 @@
-import { useMemo, useState } from 'react';
-import type { ComponentType, ReactNode } from 'react';
+import clsx from 'clsx';
+import { useEffect, useMemo, useState } from 'react';
+import type { ComponentType, HTMLProps, ReactNode } from 'react';
 
 import Container from 'components/Container';
 import type { ContainerSizes } from 'components/Container';
 import Icon from 'components/Icon';
-import type { ClassName, DisplayValueObject, MenuItemProps } from 'types';
-import { headingFont, computeClassName, focus } from 'utils/commonClassNames';
+import { Span } from 'components/Typography';
+import type { Customization, DisplayValueObject } from 'types';
+import { customize, customizeTopLevel, focus, hoverAnimation } from 'utils/commonClassNames';
 
-export interface NavbarProps {
+export interface NavbarProps extends Omit<HTMLProps<HTMLElement>, 'size'> {
   /**
-   * The currently selected menu item, should match the `.value` of one of the items in menuItems
+   * The background color of the navbar and its associated menu items
    */
-  activeMenuItem: string;
-  /**
-   * Will add or override tailwind classes
-   */
-  classNames?: {
-    desktopMenuItem?: ClassName;
-    desktopMenuNav?: ClassName;
-    logoWrapper?: ClassName;
-    mobileMenuButton?: ClassName;
-    mobileMenuItem?: ClassName;
-    mobileMenuNav?: ClassName;
-    mobileMenuWrapper?: ClassName;
-    wrapper?: ClassName;
-  };
+  color?: 'solid' | 'transparent';
   /**
    * The size of the container that wraps the Navbar. Should match what you're using in the content for the best UX
    */
   containerSize?: ContainerSizes;
   /**
-   * A react element used to show branding on the top-left of the Navbar
+   * Will add or override tailwind classes
    */
-  logo: ReactNode;
+  custom?: {
+    container?: Customization;
+    el?: Customization;
+    hamburger?: Customization;
+    hamburgerContainer?: Customization;
+    leftContent?: Customization;
+    list?: Customization;
+    listContainer?: Customization;
+    listItem?: Customization;
+    listMobile?: Customization;
+    mobileOverlay?: Customization;
+    rightContent?: Customization;
+  };
   /**
-   * The React component used to display nav items. Should have "className", "children", "href", and "setMenuClose" props available (see example in Navbar.md for usage)
+   * Replaces the default hyperlink with a custom component such as a React Router Link
    */
-  MenuItem: ComponentType<MenuItemProps>;
+  CustomNavItem?: ComponentType<HTMLProps<HTMLAnchorElement>>;
+  /**
+   * Causes the navbar to stick to the top of the screen. Creates an empty div with margin at the top of the page
+   */
+  sticky?: boolean;
+  /**
+   * Additional content appearing on the left side of the navbar
+   */
+  leftContent?: ReactNode;
   /**
    * A DisplayValueObject where the display is shown in the menu item and the value is the URL to navigate to
    */
-  menuItems: DisplayValueObject[];
+  menuItems?: DisplayValueObject[];
+  /**
+   * Additional content appearing on the right side of the navbar
+   */
+  rightContent?: ReactNode;
+  /**
+   * Changes the navbar vertical's padding
+   */
+  size?: 'compact' | 'default';
+}
+
+export const buildNavbarStyles = ({
+  className = '',
+  color = 'solid',
+  custom,
+  menuOpen = false,
+  size = 'default',
+  sticky = false,
+}: {
+  className?: string;
+  color?: NavbarProps['color'];
+  custom?: NavbarProps['custom'];
+  menuOpen?: boolean;
+  size?: NavbarProps['size'];
+  sticky?: boolean;
+}) => ({
+  container: customize('flex h-full', custom?.container),
+  el: customizeTopLevel(
+    [
+      'duration-75 ease-in-out h-72 flex items-center transition w-full',
+      hoverAnimation,
+      {
+        'bg-raised-light': color === 'solid',
+        'dark:bg-raised-dark': color === 'solid',
+        'shadow-level-4': color === 'solid',
+        fixed: sticky,
+      },
+    ],
+    className,
+    custom?.el
+  ),
+  hamburger: customize(hoverAnimation, custom?.hamburger),
+  hamburgerContainer: customize(
+    [
+      focus,
+      'block md:hidden px-16',
+      { 'py-8': size === 'compact', 'py-24': size === 'default', 'text-primary-dark': menuOpen },
+    ],
+    custom?.hamburgerContainer
+  ),
+  leftContent: customize(
+    ['mr-48', { 'mt-8': size === 'compact', 'mt-16': size === 'default' }],
+    custom?.leftContent
+  ),
+  list: customize('hidden md:flex w-full', custom?.list),
+  listContainer: customize('flex-grow h-full w-full', custom?.listContainer),
+  listItem: customize(
+    [
+      focus,
+      'block border-b border-b-raised-border-light dark:border-b-raised-border-dark group hover:text-primary-dark md:border-b-0 px-16',
+      { 'py-8': size === 'compact', 'py-24': size === 'default' },
+    ],
+    custom?.listItem
+  ),
+  listMobile: customize('flex flex-col h-full', custom?.listMobile),
+  mobileOverlay: customize(
+    [
+      'bg-raised-light dark:bg-raised-dark flex fixed items-center justify-center md:hidden overflow-hidden w-screen z-50',
+      hoverAnimation,
+    ],
+    custom?.mobileOverlay
+  ),
+  rightContent: customize('mr-16 md:mr-0', custom?.rightContent),
+});
+
+export function DefaultNavItem({ children, ...props }: HTMLProps<HTMLAnchorElement>) {
+  return (
+    <a {...props}>
+      <Span className={clsx('group-hover:text-primary-dark', hoverAnimation)}>{children}</Span>
+    </a>
+  );
 }
 
 /**
  * A main navigation bar for web applications
  */
 export function Navbar({
-  activeMenuItem,
-  classNames,
+  className,
+  color = 'solid',
   containerSize = 'four-column',
-  logo,
-  MenuItem,
-  menuItems,
+  custom,
+  CustomNavItem = DefaultNavItem,
+  leftContent = null,
+  menuItems = [],
+  rightContent = null,
+  size,
+  sticky = false,
+  ...props
 }: NavbarProps) {
-  const computedClassNames = useMemo(
-    () => ({
-      desktopMenuItem: (item: DisplayValueObject) =>
-        computeClassName(
-          [
-            focus,
-            {
-              'bg-white dark:bg-black': activeMenuItem === item.value,
-              'hover:bg-primary-light': activeMenuItem !== item.value,
-              'shadow-level-2': activeMenuItem === item.value,
-              'text-primary-type': activeMenuItem !== item.value,
-              'text-black dark:text-white': activeMenuItem === item.value,
-            },
-            'flex',
-            'items-center',
-            'p-16',
-            'text-center',
-            'text-heading-xs',
-          ],
-          classNames?.desktopMenuItem
-        ),
-      desktopMenuNav: computeClassName(['hidden', 'md:flex', '-mr-32'], classNames?.desktopMenuNav),
-      logoWrapper: computeClassName(['flex-grow', 'pr-0', 'md:pr-16'], classNames?.logoWrapper),
-      mobileMenuButton: computeClassName(
-        [
-          'block',
-          'hover:bg-primary-light',
-          'md:hidden',
-          'p-16',
-          '-mr-16',
-          'text-heading-xs',
-          'text-primary-type',
-        ],
-        classNames?.mobileMenuButton
-      ),
-      mobileMenuItem: (item: DisplayValueObject) =>
-        computeClassName(
-          [
-            focus,
-            {
-              'bg-white dark:bg-black': activeMenuItem === item.value,
-              'hover:bg-primary-light': activeMenuItem !== item.value,
-              'shadow-level-2': activeMenuItem === item.value,
-              'text-primary-type': activeMenuItem !== item.value,
-              'text-black dark:text-white': activeMenuItem === item.value,
-            },
-            'px-16',
-            'py-8',
-            'text-heading-sm',
-            'text-left',
-          ],
-          classNames?.mobileMenuItem
-        ),
-      mobileMenuNav: computeClassName(
-        ['absolute', 'bg-primary', 'h-full', 'flex', 'flex-col', 'left-0', 'w-full'],
-        classNames?.mobileMenuNav
-      ),
-      mobileMenuWrapper: computeClassName(
-        [
-          'md:hidden',
-          'relative',
-          'flex',
-          'h-screen',
-          'items-center',
-          'justify-center',
-          'w-screen',
-          'z-50',
-        ],
-        classNames?.mobileMenuWrapper
-      ),
-      wrapper: computeClassName([headingFont, 'bg-primary'], classNames?.wrapper),
-    }),
-    [activeMenuItem, classNames]
-  );
+  const [transitionToSolid, setTransitionToSolid] = useState(color === 'solid');
+  useEffect(() => {
+    const changeNavbarColor = () => {
+      if (color === 'transparent') {
+        if (window.scrollY >= 32) {
+          setTransitionToSolid(true);
+        } else {
+          setTransitionToSolid(false);
+        }
+      }
+    };
+    changeNavbarColor();
+    window.addEventListener('scroll', changeNavbarColor);
+    return () => {
+      window.removeEventListener('scroll', changeNavbarColor);
+    };
+  }, [color]);
 
   // This menu will only ever be visible on small screens
   const [menuOpen, setMenuOpen] = useState(false);
 
+  const styles = useMemo(
+    () =>
+      buildNavbarStyles({
+        className,
+        color: transitionToSolid || menuOpen ? 'solid' : 'transparent',
+        custom,
+        size,
+        sticky,
+      }),
+    [className, custom, menuOpen, size, sticky, transitionToSolid]
+  );
+
   return (
-    <>
-      <header className={computedClassNames.wrapper}>
-        <Container classNames={{ container: 'flex' }} size={containerSize}>
-          <div className={computedClassNames.logoWrapper}>{logo}</div>
+    <div className="relative">
+      <header {...props} className={styles.el}>
+        <Container className={styles.container} size={containerSize}>
+          {!!leftContent && <div className={styles.leftContent}>{leftContent}</div>}
+          <nav aria-label="Site Navigation" className={styles.listContainer}>
+            <ul className={styles.list}>
+              {menuItems.map((item) => (
+                <li>
+                  <CustomNavItem
+                    className={styles.listItem}
+                    href={item.value}
+                    key={item.value}
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    {item.display}
+                  </CustomNavItem>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          {rightContent && <div className={styles.rightContent}>{rightContent}</div>}
           {!!menuItems.length && (
             <button
               aria-label={menuOpen ? 'Open Navigation Menu' : 'Close Navigation Menu'}
-              className={computedClassNames.mobileMenuButton}
+              className={styles.hamburgerContainer}
               onClick={() => setMenuOpen(!menuOpen)}
               type="button"
             >
-              <div className="text-center w-16">
+              <Span className={styles.hamburger}>
                 <Icon icon={menuOpen ? 'times' : 'bars'} />
-              </div>
+              </Span>
             </button>
           )}
-          <nav className={computedClassNames.desktopMenuNav}>
-            {menuItems.map((item) => (
-              <MenuItem
-                className={computedClassNames.desktopMenuItem(item)}
-                href={item.value}
-                key={item.value}
-                setMenuClose={() => setMenuOpen(false)}
-              >
-                {item.display}
-              </MenuItem>
-            ))}
-          </nav>
         </Container>
       </header>
-      {menuOpen && (
-        <div className={computedClassNames.mobileMenuWrapper}>
-          <nav className={computedClassNames.mobileMenuNav}>
+      {sticky && <div className="h-72" />}
+      <div
+        className={styles.mobileOverlay}
+        style={{ height: menuOpen ? 'calc(100vh - 72px)' : '0px' }}
+      >
+        <nav aria-hidden className={styles.listContainer}>
+          <ul className={styles.listMobile}>
             {menuItems.map((item) => (
-              <MenuItem
-                className={computedClassNames.mobileMenuItem(item)}
-                href={item.value}
-                key={item.value}
-                setMenuClose={() => setMenuOpen(false)}
-              >
-                {item.display}
-              </MenuItem>
+              <li>
+                <CustomNavItem
+                  className={styles.listItem}
+                  href={item.value}
+                  key={item.value}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {item.display}
+                </CustomNavItem>
+              </li>
             ))}
-          </nav>
-        </div>
-      )}
-    </>
+          </ul>
+        </nav>
+      </div>
+    </div>
   );
 }
 
