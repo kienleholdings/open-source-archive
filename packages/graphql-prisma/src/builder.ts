@@ -1,10 +1,11 @@
 import type SchemaBuilder from '@pothos/core/dts/builder';
-import type { PrismaClient } from '@prisma/client';
 
 export type PrismaBuilder<T> = { PrismaTypes: T };
 export const genPrismaBuilderConfig = (
-  client: PrismaClient
-): { prisma: { client: PrismaClient } } => ({
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  client: any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+): { prisma: { client: any } } => ({
   prisma: {
     client,
   },
