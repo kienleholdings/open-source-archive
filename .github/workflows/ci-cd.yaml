@@ -108,7 +108,7 @@ jobs:
   #       run: pnpm typecheck
   deploy-dev:
     name: Deploy Development Environment
-    needs: [build, lint, test, typecheck]
+    needs: [build, lint, test]
     if: github.ref == 'refs/heads/develop'
     runs-on: ubuntu-latest
     steps:
@@ -122,7 +122,7 @@ jobs:
         run: 'echo "Insert your Dev Deploy Script Here"'
   publish-packages:
     name: Publish Packages
-    needs: [build, lint, test, typecheck]
+    needs: [build, lint, test]
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
@@ -136,7 +136,7 @@ jobs:
         run: 'echo "Insert your Package Publish Script Here"'
   deploy-prod:
     name: Deploy Production Environment
-    needs: [build, lint, test, typecheck]
+    needs: [build, lint, test]
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
