@@ -1,5 +1,6 @@
-const { createConfig } = require('@kienleholdings/zephyr-core');
-
-const config = createConfig(['./src/**/*.ts', './src/**/*.tsx']);
+const config = {
+  content: ['./src/**/*.ts', './src/**/*.tsx'],
+  presets: [require('@kienleholdings/zephyr-core')],
+};
 
 module.exports = config;

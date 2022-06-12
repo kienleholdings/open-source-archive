@@ -41,8 +41,12 @@ export { default as RadioGroup } from 'components/RadioGroup';
 export type { RadioGroupProps } from 'components/RadioGroup';
 export { default as Row } from 'components/Row';
 export type { RowProps } from 'components/Row';
+export { default as Sidebar } from 'components/Sidebar';
+export type { SidebarProps } from 'components/Sidebar';
 export { default as SingleSelect } from 'components/SingleSelect';
 export type { SingleSelectProps } from 'components/SingleSelect';
+export { default as Switch } from 'components/Switch';
+export type { SwitchProps } from 'components/Switch';
 export { default as TextArea } from 'components/TextArea';
 export type { TextAreaProps } from 'components/TextArea';
 export { default as Toast } from 'components/Toast';
@@ -50,7 +54,7 @@ export type { ToastProps } from 'components/Toast';
 export { default as Tooltip } from 'components/Tooltip';
 export type { TooltipProps } from 'components/Tooltip';
 export { default as Typography } from 'components/Typography';
-export { H1, H2, P, Span } from 'components/Typography';
+export { Div, H1, H2, P, Span, Strong } from 'components/Typography';
 export type { TypographyProps } from 'components/Typography';
 
 // Types from types/index.ts

@@ -13,12 +13,12 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Changed
 
-- **Breaking:** Replaced all Colors with Zephyr Foundations 4.0 Styles
-- **Breaking:** Replaced all Font Styles with Zephyr Foundations 4.0 Styles
+- **Breaking:** Completely redesigned Tailwind Config from the ground up, treat this like a new
+  project entirely
 
 ### Removed
 
-- N / A
+- Removed TypeScript and linting, it wasn't doing anything here anyway
 
 ## [3.1.3] - 2022-04-25
 

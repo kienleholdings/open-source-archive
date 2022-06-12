@@ -1,80 +1,63 @@
 import { useMemo } from 'react';
-import type { ReactNode } from 'react';
+import type { HTMLProps, ReactNode } from 'react';
 
-import Typography from 'components/Typography';
-import type { ClassName } from 'types';
-import { computeClassName } from 'utils/commonClassNames';
+import { buildTypeStyles } from 'components/Typography';
+import type { Customization } from 'types';
+import { customize, customizeTopLevel } from 'utils/commonClassNames';
 
-export interface CardProps {
+export interface CardProps extends HTMLProps<HTMLDivElement> {
   children?: ReactNode;
   /**
    * Will add or override tailwind classes
    */
-  classNames?: {
-    body?: ClassName;
-    footer?: ClassName;
-    header?: ClassName;
-    wrapper?: ClassName;
+  custom?: {
+    body?: Customization;
+    el?: Customization;
+    header?: Customization;
   };
   /**
-   * Contents of the lower-portion of the card, usually a `<Button />`
+   * Contents of the upper-portion of the card, usually a string
    */
-  footer?: ReactNode;
+  header?: ReactNode | string;
   /**
-   * Contents of the upper-portion of the card, usually a `<Text style="heading-xs" />`
-   */
-  header?: ReactNode;
-  /**
-   * Contents that are placed after the header, but before the body, usually a `<img />`
+   * Contents that are placed after the header, but before the body, usually an image
    */
   preBody?: ReactNode;
 }
 
+export const buildCardStyles = ({
+  className,
+  custom,
+}: {
+  className?: string;
+  custom?: CardProps['custom'];
+}) => ({
+  body: customize('p-16', custom?.body),
+  el: customizeTopLevel(
+    'block bg-raised-light dark:bg-raised-dark rounded shadow-level-3 text-type-light dark:text-type-dark',
+    className,
+    custom?.el
+  ),
+  header: customize(
+    [
+      'border-b border-raised-border-light dark:border-raised-border-dark p-16',
+      buildTypeStyles({ type: 'h6' }),
+    ],
+    custom?.header
+  ),
+});
+
 /**
- * A rectangular container with an optional header, footer, and styled body
+ * A rectangular container with an optional header, and styled body
  */
-export function Card({ children, classNames, footer, header, preBody }: CardProps) {
-  const computedClassNames = useMemo(
-    () => ({
-      body: computeClassName(['p-16'], classNames?.body),
-      footer: computeClassName(
-        ['border-t', 'border-bg-light', 'dark:border-bg-dark', 'p-16'],
-        classNames?.footer
-      ),
-      header: computeClassName(
-        ['border-b', 'border-bg-light', 'dark:border-bg-dark', 'p-16', 'mb-0'],
-        classNames?.header
-      ),
-      wrapper: computeClassName(
-        [
-          'block',
-          'bg-white',
-          'dark:bg-black',
-          'rounded',
-          'shadow-level-3',
-          'text-black',
-          'dark:text-white',
-        ],
-        classNames?.wrapper
-      ),
-    }),
-    [classNames]
-  );
+export function Card({ children, className, custom, header, preBody }: CardProps) {
+  const styles = useMemo(() => buildCardStyles({ className, custom }), [className, custom]);
 
   return (
-    <div className={computedClassNames.wrapper}>
-      {header && (
-        <Typography
-          classNames={{ wrapper: computedClassNames.header }}
-          type="heading-xs"
-          variant="div"
-        >
-          {header}
-        </Typography>
-      )}
+    <div className={styles.el}>
+      {header && <div className={styles.header}>{header}</div>}
       {preBody}
-      <div className={computedClassNames.body}>{children}</div>
-      {footer && <div className={computedClassNames.footer}>{footer}</div>}
+      <div className={styles.body}>{children}</div>
     </div>
   );
 }

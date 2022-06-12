@@ -1,18 +1,18 @@
 import { useMemo } from 'react';
-import type { ReactNode } from 'react';
+import type { HTMLProps, ReactNode } from 'react';
 
-import type { ClassName } from 'types';
-import { computeClassName } from 'utils/commonClassNames';
+import type { Customization } from 'types';
+import { customizeTopLevel } from 'utils/commonClassNames';
 
 import RowContext from './RowContext';
 
-export interface RowProps {
+export interface RowProps extends Omit<HTMLProps<HTMLDivElement>, 'wrap'> {
   children?: ReactNode;
   /**
    * Will add or override tailwind classes
    */
-  classNames?: {
-    row?: ClassName;
+  custom?: {
+    el?: Customization;
   };
   /**
    * Puts an 8pt margin on each edge of the column
@@ -24,31 +24,53 @@ export interface RowProps {
   wrap?: boolean;
 }
 
+export const buildRowStyles = ({
+  className,
+  custom,
+  gutter = true,
+  wrap = false,
+}: {
+  className?: string;
+  custom?: RowProps['custom'];
+  gutter?: boolean;
+  wrap?: boolean;
+}) => ({
+  el: customizeTopLevel(
+    [
+      {
+        '-m-8': gutter,
+        'flex-wrap': wrap,
+      },
+      'flex',
+    ],
+    className,
+    custom?.el
+  ),
+});
+
 /**
  * A flex grid designed to contain columns
  */
-export function Row({ children, classNames, gutter = true, wrap = false }: RowProps) {
-  const computedClassNames = useMemo(
-    () => ({
-      row: computeClassName(
-        [
-          {
-            '-m-8': gutter,
-            'flex-wrap': wrap,
-          },
-          'flex',
-        ],
-        classNames?.row
-      ),
-    }),
-    [classNames, gutter, wrap]
+export function Row({
+  children,
+  className,
+  custom,
+  gutter = true,
+  wrap = false,
+  ...props
+}: RowProps) {
+  const styles = useMemo(
+    () => buildRowStyles({ className, custom, gutter, wrap }),
+    [className, custom, gutter, wrap]
   );
 
   const context = useMemo(() => ({ gutter }), [gutter]);
 
   return (
     <RowContext.Provider value={context}>
-      <div className={computedClassNames.row}>{children}</div>
+      <div {...props} className={styles.el}>
+        {children}
+      </div>
     </RowContext.Provider>
   );
 }

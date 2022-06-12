@@ -60,9 +60,17 @@ interface CommonProps {
   };
   children?: ReactNode;
   /**
+   * Forces rendering desktop-only font sizes (not recommended)
+   */
+  desktop?: boolean;
+  /**
    * Sets the font style to italic
    */
   italic?: boolean;
+  /**
+   * Forces rendering mobile-only font sizes (not recommended)
+   */
+  mobile?: boolean;
   /**
    * Adds a 16px margin below the element to simulate a break between paragraphs
    */
@@ -77,14 +85,18 @@ export const buildTypeStyles = ({
   bold = false,
   className = '',
   custom,
+  desktop = false,
   italic = false,
+  mobile = false,
   paragraphSpacing = false,
   type,
 }: {
   bold?: boolean;
   className?: string;
   custom?: { el?: Customization };
+  desktop?: boolean;
   italic?: boolean;
+  mobile?: boolean;
   paragraphSpacing?: boolean;
   type: TypographyType;
 }) => {
@@ -103,32 +115,73 @@ export const buildTypeStyles = ({
         'font-normal': !bold && !type.includes('h'),
         italic,
         'mb-16': paragraphSpacing,
-        'md:text-body-desktop': type === 'body',
-        'md:text-body-lg-desktop': type === 'body-lg',
-        'md:text-body-sm-desktop': type === 'body-sm',
-        'md:text-body-xl-desktop': type === 'body-xl',
-        'md:text-h1-desktop': type === 'h1',
-        'md:text-h2-desktop': type === 'h2',
-        'md:text-h3-desktop': type === 'h3',
-        'md:text-h4-desktop': type === 'h4',
-        'md:text-h5-desktop': type === 'h5',
-        'md:text-h6-desktop': type === 'h6',
-        'text-body-mobile': type === 'body',
-        'text-body-lg-mobile': type === 'body-lg',
-        'text-body-sm-mobile': type === 'body-sm',
-        'text-body-xl-mobile': type === 'body-xl',
-        'text-h1-mobile': type === 'h1',
-        'text-h2-mobile': type === 'h2',
-        'text-h3-mobile': type === 'h3',
-        'text-h4-mobile': type === 'h4',
-        'text-h5-mobile': type === 'h5',
-        'text-h6-mobile': type === 'h6',
+        'md:text-body-desktop': type === 'body' && !desktop && !mobile,
+        'md:text-body-lg-desktop': type === 'body-lg' && !desktop && !mobile,
+        'md:text-body-sm-desktop': type === 'body-sm' && !desktop && !mobile,
+        'md:text-body-xl-desktop': type === 'body-xl' && !desktop && !mobile,
+        'md:text-h1-desktop': type === 'h1' && !desktop && !mobile,
+        'md:text-h2-desktop': type === 'h2' && !desktop && !mobile,
+        'md:text-h3-desktop': type === 'h3' && !desktop && !mobile,
+        'md:text-h4-desktop': type === 'h4' && !desktop && !mobile,
+        'md:text-h5-desktop': type === 'h5' && !desktop && !mobile,
+        'md:text-h6-desktop': type === 'h6' && !desktop && !mobile,
+        'text-body-desktop': type === 'body' && !desktop && !mobile,
+        'text-body-lg-desktop': type === 'body-lg' && desktop,
+        'text-body-sm-desktop': type === 'body-sm' && desktop,
+        'text-body-xl-desktop': type === 'body-xl' && desktop,
+        'text-h1-desktop': type === 'h1' && desktop,
+        'text-h2-desktop': type === 'h2' && desktop,
+        'text-h3-desktop': type === 'h3' && desktop,
+        'text-h4-desktop': type === 'h4' && desktop,
+        'text-h5-desktop': type === 'h5' && desktop,
+        'text-h6-desktop': type === 'h6' && desktop,
+        'text-body-mobile': type === 'body' && ((!desktop && !mobile) || mobile),
+        'text-body-lg-mobile': type === 'body-lg' && ((!desktop && !mobile) || mobile),
+        'text-body-sm-mobile': type === 'body-sm' && ((!desktop && !mobile) || mobile),
+        'text-body-xl-mobile': type === 'body-xl' && ((!desktop && !mobile) || mobile),
+        'text-h1-mobile': type === 'h1' && ((!desktop && !mobile) || mobile),
+        'text-h2-mobile': type === 'h2' && ((!desktop && !mobile) || mobile),
+        'text-h3-mobile': type === 'h3' && ((!desktop && !mobile) || mobile),
+        'text-h4-mobile': type === 'h4' && ((!desktop && !mobile) || mobile),
+        'text-h5-mobile': type === 'h5' && ((!desktop && !mobile) || mobile),
+        'text-h6-mobile': type === 'h6' && ((!desktop && !mobile) || mobile),
       },
     ],
     className,
     custom?.el
   );
 };
+
+type DivProps = CommonProps & HTMLProps<HTMLDivElement>;
+
+export function Div({
+  bold,
+  className,
+  custom,
+  children,
+  desktop = false,
+  italic,
+  mobile = false,
+  paragraphSpacing,
+  type = 'body',
+  ...props
+}: DivProps) {
+  const classNames = buildTypeStyles({
+    bold,
+    className,
+    custom,
+    desktop,
+    italic,
+    mobile,
+    paragraphSpacing,
+    type,
+  });
+  return (
+    <div {...props} className={classNames}>
+      {children}
+    </div>
+  );
+}
 
 type HeadingProps = CommonProps & HTMLProps<HTMLHeadingElement>;
 
@@ -137,12 +190,23 @@ export function H1({
   className,
   custom,
   children,
+  desktop = false,
   italic,
+  mobile = false,
   paragraphSpacing = true,
   type = 'h1',
   ...props
 }: HeadingProps) {
-  const classNames = buildTypeStyles({ bold, className, custom, italic, paragraphSpacing, type });
+  const classNames = buildTypeStyles({
+    bold,
+    className,
+    custom,
+    desktop,
+    italic,
+    mobile,
+    paragraphSpacing,
+    type,
+  });
   return (
     <h1 {...props} className={classNames}>
       {children}
@@ -155,12 +219,23 @@ export function H2({
   className,
   custom,
   children,
+  desktop = false,
   italic,
+  mobile = false,
   paragraphSpacing = true,
   type = 'h2',
   ...props
 }: HeadingProps) {
-  const classNames = buildTypeStyles({ bold, className, custom, italic, paragraphSpacing, type });
+  const classNames = buildTypeStyles({
+    bold,
+    className,
+    custom,
+    desktop,
+    italic,
+    mobile,
+    paragraphSpacing,
+    type,
+  });
   return (
     <h2 {...props} className={classNames}>
       {children}
@@ -175,12 +250,23 @@ export function P({
   className,
   custom,
   children,
+  desktop = false,
   italic,
+  mobile = false,
   paragraphSpacing = true,
   type = 'body',
   ...props
 }: PProps) {
-  const classNames = buildTypeStyles({ bold, className, custom, italic, paragraphSpacing, type });
+  const classNames = buildTypeStyles({
+    bold,
+    className,
+    custom,
+    desktop,
+    italic,
+    mobile,
+    paragraphSpacing,
+    type,
+  });
   return (
     <p {...props} className={classNames}>
       {children}
@@ -195,16 +281,58 @@ export function Span({
   className,
   custom,
   children,
+  desktop = false,
   italic,
+  mobile = false,
   paragraphSpacing,
   type = 'body',
   ...props
 }: SpanProps) {
-  const classNames = buildTypeStyles({ bold, className, custom, italic, paragraphSpacing, type });
+  const classNames = buildTypeStyles({
+    bold,
+    className,
+    custom,
+    desktop,
+    italic,
+    mobile,
+    paragraphSpacing,
+    type,
+  });
   return (
     <span {...props} className={classNames}>
       {children}
     </span>
+  );
+}
+
+type StrongProps = CommonProps & HTMLProps<HTMLElement>;
+
+export function Strong({
+  bold = true,
+  className,
+  custom,
+  children,
+  desktop = false,
+  italic,
+  mobile = false,
+  paragraphSpacing = false,
+  type = 'body',
+  ...props
+}: StrongProps) {
+  const classNames = buildTypeStyles({
+    bold,
+    className,
+    custom,
+    desktop,
+    italic,
+    mobile,
+    paragraphSpacing,
+    type,
+  });
+  return (
+    <strong {...props} className={classNames}>
+      {children}
+    </strong>
   );
 }
 

@@ -1,3 +1,4 @@
+import { H1, P } from '@kienleholdings/zephyr-react';
 import Head from 'next/head';
 
 function Home() {
@@ -13,8 +14,14 @@ function Home() {
       </Head>
 
       <main>
-        <h1>Welcome!</h1>
-        <p>There&apos;s not much here yet, but rest assured we&apos;re working on it</p>
+        <H1>Welcome!</H1>
+        <P type="body-xl">
+          There&apos;s not much here yet, but rest assured we&apos;re working on it
+        </P>
+        <P>
+          You can however find some pretty cool Zephyr documentation here. More information on
+          things like branding and design blogs will be added soon.
+        </P>
       </main>
     </div>
   );

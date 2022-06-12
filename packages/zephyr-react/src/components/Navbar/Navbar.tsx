@@ -75,11 +75,10 @@ export const buildNavbarStyles = ({
   size?: NavbarProps['size'];
   sticky?: boolean;
 }) => ({
-  container: customize('flex h-full', custom?.container),
+  container: customize('flex h-full pr-0', custom?.container),
   el: customizeTopLevel(
     [
-      hoverAnimation,
-      'flex items-center w-full',
+      'duration-75 flex items-center transition-all w-full',
       {
         'bg-raised-light': color === 'solid',
         'dark:bg-raised-dark': color === 'solid',
@@ -117,13 +116,7 @@ export const buildNavbarStyles = ({
   ),
   listMobile: customize('flex flex-col h-full', custom?.listMobile),
   mobileOverlay: customize(
-    [
-      'bg-raised-light dark:bg-raised-dark flex fixed items-center justify-center md:hidden overflow-hidden w-screen z-50',
-      hoverAnimation,
-      {
-        'delay-200': menuOpen,
-      },
-    ],
+    'bg-raised-light dark:bg-raised-dark duration-75 flex fixed items-center justify-center md:hidden overflow-hidden transition-all w-screen z-50',
     custom?.mobileOverlay
   ),
   rightContent: customize('mr-16 md:mr-0', custom?.rightContent),
@@ -149,7 +142,7 @@ export function Navbar({
   leftContent = null,
   menuItems = [],
   rightContent = null,
-  size,
+  size = 'default',
   sticky = false,
   ...props
 }: NavbarProps) {
@@ -157,7 +150,7 @@ export function Navbar({
   useEffect(() => {
     const changeNavbarColor = () => {
       if (color === 'transparent') {
-        if (window.scrollY >= 32) {
+        if (window.scrollY >= 2) {
           setTransitionToSolid(true);
         } else {
           setTransitionToSolid(false);
@@ -192,14 +185,13 @@ export function Navbar({
       <header {...props} className={styles.el}>
         <Container className={styles.container} size={containerSize}>
           {!!leftContent && <div className={styles.leftContent}>{leftContent}</div>}
-          <nav aria-label="Site Navigation" className={styles.listContainer}>
+          <nav aria-label="Primary Navigation" className={styles.listContainer}>
             <ul className={styles.list}>
               {menuItems.map((item) => (
-                <li>
+                <li key={item.value}>
                   <CustomNavItem
                     className={styles.listItem}
                     href={item.value}
-                    key={item.value}
                     onClick={() => setMenuOpen(false)}
                   >
                     {item.display}
@@ -233,15 +225,15 @@ export function Navbar({
         className={styles.mobileOverlay}
         style={{ height: menuOpen ? 'calc(100vh - 72px)' : '0px' }}
       >
-        <nav aria-hidden className={styles.listContainer}>
+        <nav className={styles.listContainer}>
           <ul className={styles.listMobile}>
             {menuItems.map((item) => (
-              <li>
+              <li key={item.value}>
                 <CustomNavItem
                   className={styles.listItem}
                   href={item.value}
-                  key={item.value}
                   onClick={() => setMenuOpen(false)}
+                  tabIndex={-1}
                 >
                   {item.display}
                 </CustomNavItem>
