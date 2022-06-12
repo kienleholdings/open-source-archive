@@ -89,7 +89,6 @@ function FileUploader({
     [multiple, onChange, uploadcarePublicKey, value]
   );
 
-  // @ts-expect-error: Need to fix this in a future PR
   const { getInputProps, getRootProps } = useDropzone({ onDrop: onUpload, accept });
 
   return (

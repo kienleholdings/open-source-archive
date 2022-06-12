@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project
 adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.0.0] - 2022-06-01
+
+### Added
+
+- N / A
+
+### Changed
+
+- **Breaking:** Completely redesigned Tailwind Config from the ground up, treat this like a new
+  project entirely
+
+### Removed
+
+- Removed TypeScript and linting, it wasn't doing anything here anyway
+
 ## [3.1.3] - 2022-04-25
 
 ### Added
