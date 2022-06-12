@@ -1,4 +1,5 @@
 import type SchemaBuilder from '@pothos/core/dts/builder';
+// @ts-expect-error: PrismaClient sometimes doesn't get generated in CI, remove this in your local build if this causes errors
 import type { PrismaClient } from '@prisma/client';
 
 export type PrismaBuilder<T> = { PrismaTypes: T };
