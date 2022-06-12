@@ -4,14 +4,10 @@ import Home from './index.page';
 
 describe('pages', () => {
   describe('Home', () => {
-    it('should render a h1 that says "welcome to next.js"', () => {
+    it('should render a h1 that says "Welcome!"', () => {
       render(<Home />);
       const main = within(screen.getByRole('main'));
-      expect(main.getByRole('heading', { level: 1, name: /welcome to next\.js!/i })).toBeDefined();
-
-      const footer = within(screen.getByRole('contentinfo'));
-      const link = within(footer.getByRole('link'));
-      expect(link.getByRole('img', { name: /vercel logo/i })).toBeDefined();
+      expect(main.getByRole('heading', { level: 1, name: /Welcome!/i })).toBeDefined();
     });
   });
 });
