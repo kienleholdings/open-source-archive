@@ -82,30 +82,30 @@ jobs:
           name: builds
       - name: Test All Apps and Packages
         run: pnpm test
-  typecheck:
-    name: Typecheck All Apps and Packages
-    needs: [build]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-      - name: Install and Set Up pnpm
-        uses: pnpm/action-setup@v2.2.2
-        with:
-          version: 7.1.0
-      - name: Setup Nodejs LTS
-        uses: actions/setup-node@v3
-        with:
-          cache: 'pnpm'
-          node-version: 'lts/*'
-      - name: Install Dependencies
-        run: pnpm install
-      - name: Restore Build Artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: builds
-      - name: Lint All Apps and Packages
-        run: pnpm typecheck
+  # typecheck:
+  #   name: Typecheck All Apps and Packages
+  #   needs: [build]
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout Code
+  #       uses: actions/checkout@v3
+  #     - name: Install and Set Up pnpm
+  #       uses: pnpm/action-setup@v2.2.2
+  #       with:
+  #         version: 7.1.0
+  #     - name: Setup Nodejs LTS
+  #       uses: actions/setup-node@v3
+  #       with:
+  #         cache: 'pnpm'
+  #         node-version: 'lts/*'
+  #     - name: Install Dependencies
+  #       run: pnpm install
+  #     - name: Restore Build Artifacts
+  #       uses: actions/download-artifact@v3
+  #       with:
+  #         name: builds
+  #     - name: Lint All Apps and Packages
+  #       run: pnpm typecheck
   deploy-dev:
     name: Deploy Development Environment
     needs: [build, lint, test, typecheck]
