@@ -24,9 +24,9 @@
   },
   "homepage": "https://github.com/kienleholdings/open-source#readme",
   "devDependencies": {
-    "@kienleholdings/mdlint": "^0.1.2",
-    "@kienleholdings/prettierrc": "*",
-    "lint-staged": "^12.4.3",
+    "@kienleholdings/mdlint": "workspace:^0.1.2",
+    "@kienleholdings/prettierrc": "workspace:*",
+    "lint-staged": "^12.5.0",
     "markdownlint-cli2": "^0.4.0",
     "prettier": "2.6.2",
     "simple-git-hooks": "^2.8.0",

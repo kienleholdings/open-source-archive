@@ -134,7 +134,7 @@ export function Footer({
         )}
       </Container>
       <div className={computedClassNames.bottomRowWrapper}>
-        <Container classNames={{ container: computedClassNames.bottomRow }} size={containerSize}>
+        <Container className={computedClassNames.bottomRow} size={containerSize}>
           <Typography
             classNames={{ wrapper: computedClassNames.copyright }}
             type="body"

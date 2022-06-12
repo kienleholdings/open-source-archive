@@ -2,6 +2,19 @@
 
 🧡 Open Source Apps and Packages from Kienle Holdings
 
+## Big Changes Are Coming
+
+We're super pumped to be finishing up Zephyr 4.0 very soon here! Unfortunately that means you're
+gonna see some weird looking things in this repo for the forseeable future. Some of those changes
+include:
+
+- Automatic package publishing is disabled
+- We won't really be looking at any Zephyr related PRs
+- Some stuff might get pushed to main that looks like it shouldn't be (as we move our OSS
+  documentation infrastructure from AWS to Vercel)
+
+With that in mind, enjoy! Don't be afraid to open up a discussion of things look really wacky.
+
 ## Introduction
 
 We firmly believe that any piece of software that can be open sourced absolutely should be. This
