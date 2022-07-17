@@ -32,13 +32,14 @@ export const buildLoaderStyles = ({
   custom?: LoaderProps['custom'];
   type: LoaderProps['type'];
 }) => ({
-  bar: customize('bg-primary h-full w-full', custom?.bar),
-  barWrapper: customize('animate-pule h-full flex w-full', custom?.barWrapper),
+  bar: customize('bg-primary h-8', custom?.bar),
+  barWrapper: customize('flex-1', custom?.barWrapper),
   el: customizeTopLevel(
     [
       {
+        'motion-safe:animate-pulse': type === 'bar',
         'dark:bg-raised-dark light:bg-raised-light': type === 'bar',
-        'h-8': type === 'bar',
+        flex: type === 'bar',
         'motion-safe:animate-spin': type === 'spinner',
         'text-primary': type === 'spinner',
         'w-full': type === 'bar',
