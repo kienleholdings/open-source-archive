@@ -8,7 +8,7 @@ function LoaderPage() {
   const router = useRouter();
   return (
     <Row gutter wrap>
-      <Col md="3" className="">
+      <Col md="3">
         <Sidebar activeItem={router.pathname} menuItems={ZEPHYR_SIDEBAR_ITEMS} />
       </Col>
       <Col md="9">
@@ -27,6 +27,9 @@ function LoaderPage() {
         <H3>Default</H3>
         <Loader className="mb-16" />
         <Code>{`<Loader />`}</Code>
+        <H3>Bar</H3>
+        <Loader className="mb-16" type="bar" />
+        <Code>{`<Loader type="bar" />`}</Code>
       </Col>
     </Row>
   );
