@@ -1,3 +1,4 @@
+import { usePreferDarkMode } from '@kienleholdings/hooks';
 import { Navbar, Container } from '@kienleholdings/zephyr-react';
 import type { AppProps } from 'next/app';
 import Image from 'next/image';
@@ -21,11 +22,7 @@ function ExampleApp({ Component, pageProps }: AppProps) {
     [router.pathname]
   );
 
-  // TODO: We should probably make a @kienleholdings/hooks package and move this there
-  let isDarkMode = false;
-  if (typeof window !== 'undefined') {
-    isDarkMode = window.matchMedia('(prefers-color-scheme: dark)')?.matches ?? false;
-  }
+  const isDarkMode = usePreferDarkMode();
 
   const leftContent = useMemo(
     () => (
@@ -44,7 +41,6 @@ function ExampleApp({ Component, pageProps }: AppProps) {
   return (
     <div className="bg-bg-light dark:bg-bg-dark min-h-screen w-screen md:left-auto">
       <Navbar
-        color="transparent"
         containerSize={containerSize}
         leftContent={leftContent}
         menuItems={[

@@ -1,12 +1,12 @@
 import { useMemo } from 'react';
 import type { HTMLProps } from 'react';
 
-import type { ClassName } from 'types';
+import type { Customization } from 'types';
 import { bodyFont, customizeTopLevel, focus } from 'utils/commonClassNames';
 
 export interface LinkProps extends HTMLProps<HTMLAnchorElement> {
   custom?: {
-    el?: ClassName;
+    el?: Customization;
   };
   /**
    * Removes any added font styles, ensures styles are inherited from parent element

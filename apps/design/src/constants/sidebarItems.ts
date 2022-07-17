@@ -12,6 +12,9 @@ export const ZEPHYR_SIDEBAR_ITEMS = [
   {
     display: 'Components',
     value: '/zephyr/components',
-    items: [],
+    items: [
+      { display: 'Alert', value: '/zephyr/components/alert' },
+      { display: 'Loader', value: '/zephyr/components/loader' },
+    ],
   },
 ];

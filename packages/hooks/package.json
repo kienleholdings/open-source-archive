@@ -1,0 +1,47 @@
+{
+  "name": "@kienleholdings/hooks",
+  "version": "0.1.0",
+  "description": "A useful collection of React Hooks",
+  "prettier": "@kienleholdings/prettierrc",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --sourcemap --minify --dts",
+    "dev": "ladle serve & pnpm run build --watch",
+    "lint": "eslint --cache src/**",
+    "typecheck": "tsc --noEmit"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kienleholdings/open-source.git"
+  },
+  "keywords": [
+    "Kienle Holdings",
+    "react"
+  ],
+  "author": "Kienle Technologies <hello@kienle.tech> (https://www.kienle.tech)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kienleholdings/open-source/issues"
+  },
+  "homepage": "https://github.com/kienleholdings/open-source/tree/main/packages/hooks#readme",
+  "devDependencies": {
+    "@kienleholdings/eslint-config-react": "workspace:*",
+    "@kienleholdings/prettierrc": "workspace:*",
+    "@kienleholdings/tsconfigs": "workspace:*",
+    "@types/react": "^18.0.6",
+    "eslint": "^8.14.0",
+    "prettier": "^2.6.2",
+    "react": "^18.0.0",
+    "tslib": "^2.4.0",
+    "tsup": "^5.12.6",
+    "typescript": "^4.6.3"
+  },
+  "peerDependencies": {
+    "react": ">= 18.0.0 < 19"
+  }
+}

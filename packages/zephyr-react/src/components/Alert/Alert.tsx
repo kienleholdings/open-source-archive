@@ -1,95 +1,95 @@
 import { useMemo } from 'react';
-import type { ReactNode } from 'react';
+import type { HTMLProps } from 'react';
 
-import Icon from 'components/Icon';
-import Typography from 'components/Typography';
-import type { ClassName } from 'types';
-import { computeClassName, focus } from 'utils/commonClassNames';
+import { AlertCircle, AlertOctagon } from 'components/Icons';
+import { P } from 'components/Typography';
+import type { Customization } from 'types';
+import { customize, customizeTopLevel } from 'utils/commonClassNames';
 
-export interface AlertProps {
-  children?: ReactNode;
-  /**
-   * Will add or override tailwind classes
-   */
-  classNames?: {
-    body?: ClassName;
-    closeButton?: ClassName;
-    wrapper?: ClassName;
-  };
-  /**
-   * Will display an "x" icon inside of the alert and call the passed function when the button is clicked
-   */
-  onClose?: () => void;
+export interface AlertProps extends HTMLProps<HTMLDivElement> {
   /**
    * Sets the type of alert to display. This will change the background and text colors
    */
-  type: 'negative' | 'positive' | 'primary' | 'warning';
+  color?: 'error' | 'primary';
+  /**
+   * Will add or override tailwind classes
+   */
+  custom?: {
+    el?: Customization;
+    icon?: Customization;
+    message?: Customization;
+    title?: Customization;
+  };
+  /**
+   * A large title displayed over the children of the error used to provide an easier to scan top-level error
+   */
+  title?: string;
 }
+
+export const buildAlertStyles = ({
+  className,
+  color,
+  custom,
+}: {
+  className?: string;
+  color?: AlertProps['color'];
+  custom?: AlertProps['custom'];
+}) => ({
+  el: customizeTopLevel(
+    [
+      'flex mb-16 p-16 rounded shadow-level-1',
+      {
+        'bg-error': color === 'error',
+        'bg-primary': color === 'primary',
+        'text-error-type': color === 'error',
+        'text-primary-type': color === 'primary',
+      },
+    ],
+    className,
+    custom?.el
+  ),
+  icon: customize('mr-8'),
+  message: customize(
+    {
+      'text-error-type': color === 'error',
+      'dark:text-error-type': color === 'error',
+      'text-primary-type': color === 'primary',
+      'dark:primary-type': color === 'primary',
+    },
+    custom?.message
+  ),
+  title: customize(
+    ['mb-8', { 'text-error-type': color === 'error', 'text-primary-type': color === 'primary' }],
+    custom?.title
+  ),
+});
 
 /**
  * Provides highly-visible feedback. This is best used after a user completes a complex action, such as submitting a form
  */
-function Alert({ children, classNames, onClose, type }: AlertProps) {
-  const computedClassNames = useMemo(
-    () => ({
-      body: computeClassName(
-        [
-          'flex-grow',
-          {
-            'text-white': ['negative', 'positive'].includes(type),
-            'text-primary-type': type === 'primary',
-            'text-black': type === 'warning',
-          },
-        ],
-        classNames?.body
-      ),
-      closeButton: computeClassName(
-        [
-          focus,
-          'w-16',
-          {
-            'text-white': ['negative', 'positive'].includes(type),
-            'text-primary-type': type === 'primary',
-            'text-black': type === 'warning',
-          },
-        ],
-        classNames?.closeButton
-      ),
-      wrapper: computeClassName(
-        [
-          {
-            'bg-negative': type === 'negative',
-            'bg-positive': type === 'positive',
-            'bg-primary': type === 'primary',
-            'bg-warning': type === 'warning',
-          },
-          'flex',
-          'py-16',
-          'px-24',
-          'rounded',
-          'shadow-level-2',
-        ],
-        classNames?.wrapper
-      ),
-    }),
-    [classNames, type]
+function Alert({ children, className, color = 'primary', custom, title }: AlertProps) {
+  const styles = useMemo(
+    () => buildAlertStyles({ className, color, custom }),
+    [className, color, custom]
   );
 
   return (
-    <div className={computedClassNames.wrapper} role="alert">
-      <Typography classNames={{ wrapper: computedClassNames.body }} type="body" variant="div">
-        {children}
-      </Typography>
-      {onClose && (
-        <button
-          aria-label="Close Alert"
-          className={computedClassNames.closeButton}
-          onClick={onClose}
-          type="button"
-        >
-          <Icon icon="times" />
-        </button>
+    <div className={styles.el} role="alert">
+      {color === 'error' ? (
+        <AlertOctagon className={styles.icon} />
+      ) : (
+        <AlertCircle className={styles.icon} />
       )}
+      <div>
+        {title?.length && (
+          <P className={styles.title} noColor type="body-lg">
+            {title}
+          </P>
+        )}
+        <P className={styles.message} paragraphSpacing={false} noColor>
+          {children}
+        </P>
+      </div>
     </div>
   );
 }

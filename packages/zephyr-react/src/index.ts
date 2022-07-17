@@ -29,6 +29,8 @@ export { default as InputGroup } from 'components/InputGroup';
 export type { InputGroupProps } from 'components/InputGroup';
 export { default as Link, linkStyles } from 'components/Link';
 export type { LinkProps } from 'components/Link';
+export { default as Loader } from 'components/Loader';
+export type { LoaderProps } from 'components/Loader';
 export { default as Modal } from 'components/Modal';
 export type { ModalProps } from 'components/Modal';
 export { default as Navbar } from 'components/Navbar';
@@ -54,7 +56,7 @@ export type { ToastProps } from 'components/Toast';
 export { default as Tooltip } from 'components/Tooltip';
 export type { TooltipProps } from 'components/Tooltip';
 export { default as Typography } from 'components/Typography';
-export { Div, H1, H2, P, Span, Strong } from 'components/Typography';
+export { Div, H1, H2, H3, H4, H5, H6, P, Span, Strong } from 'components/Typography';
 export type { TypographyProps } from 'components/Typography';
 
 // Types from types/index.ts
